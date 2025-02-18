@@ -1,28 +1,23 @@
 function validatePassword(firstPass, secondPass){
-    var lowercaseCount;
-    var uppercaseCount;
-    var numberCount;
+    var lowercaseCount = 0;
+    var uppercaseCount = 0;
+    var numberCount = 0;
     if(firstPass === secondPass){
         if(firstPass.length >= 8){
-            console.log("checking");
             for(var i = 0; i < firstPass.length; i++){
                 if(firstPass.charCodeAt(i) >= 48 && firstPass.charCodeAt(i) <= 57){
-                    console.log("number detected");
-                    numberCount++;
+                    ++numberCount;
                     continue;
                 }
                 if(firstPass.charCodeAt(i) >= 65 && firstPass.charCodeAt(i) <= 90){
-                    console.log("Uppercase detected");
                     uppercaseCount++;
                     continue;
                 }if(firstPass.charCodeAt(i) >= 97 && firstPass.charCodeAt(i) <= 122){
-                    console.log("lower detected");
-                    uppercaseCount++;
+                    lowercaseCount++;
                     continue;
                 }
             }
             if(lowercaseCount >= 1 && uppercaseCount >= 1 && numberCount >= 1){
-                console.log("validated");
                 return true;
             }
         }
@@ -39,7 +34,6 @@ function reverseString(password){
     for(var i = password.length - 1; i >= 0; i--){
         if(password[i] !== undefined){
             reversedString = reversedString + password[i];
-        console.log(password[i]);
         } 
     }
     return reversedString;
