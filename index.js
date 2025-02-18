@@ -1,13 +1,35 @@
 function validatePassword(firstPass, secondPass){
+    var lowercaseCount;
+    var uppercaseCount;
+    var numberCount;
     if(firstPass === secondPass){
         if(firstPass.length >= 8){
-            return true;
+            console.log("checking");
+            for(var i = 0; i < firstPass.length; i++){
+                if(firstPass.charCodeAt(i) >= 48 && firstPass.charCodeAt(i) <= 57){
+                    console.log("number detected");
+                    numberCount++;
+                    continue;
+                }
+                if(firstPass.charCodeAt(i) >= 65 && firstPass.charCodeAt(i) <= 90){
+                    console.log("Uppercase detected");
+                    uppercaseCount++;
+                    continue;
+                }if(firstPass.charCodeAt(i) >= 97 && firstPass.charCodeAt(i) <= 122){
+                    console.log("lower detected");
+                    uppercaseCount++;
+                    continue;
+                }
+            }
+            if(lowercaseCount >= 1 && uppercaseCount >= 1 && numberCount >= 1){
+                console.log("validated");
+                return true;
+            }
         }
     }
     else{
         return false;
     }
-    
 }
 
 
@@ -20,26 +42,28 @@ function reverseString(password){
         console.log(password[i]);
         } 
     }
-
     return reversedString;
 }
 
 
 function storePassword(name, firstPass, secondPass){
     const user = {
-        userName: name,
+        name: name,
         newPassword: ""
     }
 
-    if(validatePassword(firstPass, secondPass) == true){
+    if(validatePassword(firstPass, secondPass) === true){
         user.newPassword = reverseString(secondPass);
-        console.log("validated password");
     }else{
-        console.log("not validated password");
         user.newPassword = firstPass;
     }
 
-    console.log(user);
+    return user;
 }
 
-storePassword("John", "Password1234", "Password1234");
+console.log(storePassword("John", "Password1234", "Password1234"));
+console.log(storePassword("John", "Pass123", "Pass12345"));
+
+
+
+
